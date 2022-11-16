@@ -1,0 +1,3 @@
+# Modules
+":floppy_disk: service-ip-ranges":
+- modules/service-ip-ranges/**/*
