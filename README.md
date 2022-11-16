@@ -6,6 +6,27 @@
 
 Terraform package to mange useful data modules via HTTP provider.
 
+- [service-ip-ranges](./modules/service-ip-ranges)
+
+
+## Usage
+
+### Service IP Ranges
+
+```tf
+module "scalr_service_ip_ranges" {
+  source  = "tedilabs/modules/http//modules/service-ip-ranges"
+  version = "~> 0.1.0"
+
+  service = "SCALR"
+}
+```
+
+
+## Examples
+
+- [service-ip-ranges](./examples/service-ip-ranges)
+
 
 ## Self Promotion
 
