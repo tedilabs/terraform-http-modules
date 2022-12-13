@@ -1,5 +1,11 @@
 locals {
-  services = ["SCALR"]
+  services = [
+    "SCALR",
+    "TERRAFORM_CLOUD_API",
+    "TERRAFORM_CLOUD_NOTIFICATIONS",
+    "TERRAFORM_CLOUD_SENTINEL",
+    "TERRAFORM_CLOUD_VCS"
+  ]
 }
 
 

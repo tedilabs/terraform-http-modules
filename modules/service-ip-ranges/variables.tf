@@ -3,7 +3,12 @@ variable "service" {
   type        = string
 
   validation {
-    condition     = contains(["SCALR"], var.service)
-    error_message = "Valid values for `service` are `SCALR`."
+    condition = contains([
+      "SCALR",
+      "TERRAFORM_CLOUD_API",
+      "TERRAFORM_CLOUD_NOTIFICATIONS",
+      "TERRAFORM_CLOUD_SENTINEL",
+    "TERRAFORM_CLOUD_VCS"], var.service)
+    error_message = "Valid values for `service` are `SCALR`, `TERRAFORM_CLOUD_API`, `TERRAFORM_CLOUD_NOTIFICATIONS`, `TERRAFORM_CLOUD_SENTINEL`, `TERRAFORM_CLOUD_VCS`."
   }
 }
