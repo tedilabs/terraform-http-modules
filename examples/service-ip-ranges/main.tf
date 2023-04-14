@@ -1,6 +1,18 @@
 locals {
   targets = [
     {
+      service  = "ATLASSIAN"
+      category = "all"
+    },
+    {
+      service  = "ATLASSIAN"
+      category = "confluence"
+    },
+    {
+      service  = "ATLASSIAN"
+      category = "jira"
+    },
+    {
       service  = "OKTA"
       category = "all"
     },
