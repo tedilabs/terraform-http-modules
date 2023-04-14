@@ -5,16 +5,17 @@ variable "service" {
 
   validation {
     condition = contains([
+      "OKTA",
       "SCALR",
       "TERRAFORM_CLOUD",
     ], var.service)
-    error_message = "Valid values for `service` are `SCALR`, `TERRAFORM_CLOUD`."
+    error_message = "Valid values for `service` are `OKTA`, `SCALR`, `TERRAFORM_CLOUD`."
   }
 }
 
 variable "category" {
-  description = "(Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `ALL`. Valid values are depends on which service is selected."
+  description = "(Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `all`. Valid values are depends on which service is selected."
   type        = string
-  default     = "ALL"
+  default     = "all"
   nullable    = false
 }
