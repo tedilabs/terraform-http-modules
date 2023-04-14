@@ -7,6 +7,13 @@ locals {
         "all" = setunion(values(local.atlassian_cidrs)...)
       }, {})
     )
+    ## GitHub
+    "GITHUB" = merge(
+      local.github_cidrs,
+      try({
+        "all" = setunion(values(local.github_cidrs)...)
+      }, {})
+    )
     ## HashiCorp
     "TERRAFORM_CLOUD" = merge(
       local.terraform_cloud_cidrs,
@@ -47,14 +54,39 @@ locals {
     : []
   )
 
+  atlassian_categories = ["bitbucket", "confluence", "jira", "trello"]
   atlassian_cidrs = {
-    for category in ["bitbucket", "confluence", "jira", "trello"] :
+    for category in local.atlassian_categories :
     category => toset([
       for item in local.atlassian_data :
       item.cidr
       if contains(item.product, category) && contains(item.direction, "egress")
     ])
   }
+}
+
+
+###################################################
+# IP Ranges for GitHub.com
+###################################################
+
+data "http" "github" {
+  count = var.service == "GITHUB" ? 1 : 0
+
+  url = "https://api.github.com/meta"
+}
+
+locals {
+  github_data = (var.service == "GITHUB"
+    ? jsondecode(trimspace(data.http.github[0].response_body))
+    : tomap({})
+  )
+
+  github_categories = ["hooks", "web", "api", "git", "packages", "pages", "importer", "actions", "dependabot"]
+  github_cidrs = try({
+    for category in local.github_categories :
+    category => toset(local.github_data[category])
+  }, {})
 }
 
 
