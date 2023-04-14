@@ -32,11 +32,13 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_service"></a> [service](#input\_service) | (Required) The service which owns the IP ranges. | `string` | n/a | yes |
+| <a name="input_category"></a> [category](#input\_category) | (Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `ALL`. Valid values are depends on which service is selected. | `string` | `"ALL"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_category"></a> [category](#output\_category) | The category to use for filtering the IP ranges of the service. |
 | <a name="output_cidrs"></a> [cidrs](#output\_cidrs) | The list of IP CIDRs for the service. |
 | <a name="output_service"></a> [service](#output\_service) | The service which owns the IP ranges. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

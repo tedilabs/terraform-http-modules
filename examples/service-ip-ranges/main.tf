@@ -1,10 +1,17 @@
 locals {
-  services = [
-    "SCALR",
-    "TERRAFORM_CLOUD_API",
-    "TERRAFORM_CLOUD_NOTIFICATIONS",
-    "TERRAFORM_CLOUD_SENTINEL",
-    "TERRAFORM_CLOUD_VCS"
+  targets = [
+    {
+      service  = "SCALR"
+      category = "ALL"
+    },
+    {
+      service  = "TERRAFORM_CLOUD"
+      category = "ALL"
+    },
+    {
+      service  = "TERRAFORM_CLOUD"
+      category = "API"
+    },
   ]
 }
 
@@ -18,7 +25,11 @@ module "service_ip_ranges" {
   # source  = "tedilabs/modules/http//modules/service-ip-ranges"
   # version = "~> 0.1.0"
 
-  for_each = toset(local.services)
+  for_each = {
+    for target in local.targets :
+    "${target.service}/${target.category}" => target
+  }
 
-  service = each.value
+  service  = each.value.service
+  category = each.value.category
 }
