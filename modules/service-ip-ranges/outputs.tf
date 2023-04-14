@@ -9,6 +9,24 @@ output "category" {
 }
 
 output "cidrs" {
-  description = "The list of IP CIDRs for the service."
+  description = "The list of all IP CIDRs for the service."
   value       = local.cidrs
+}
+
+output "ipv4_cidrs" {
+  description = "The list of IPv4 CIDRs for the service."
+  value = toset([
+    for cidr in local.cidrs :
+    cidr
+    if cidr == replace(cidr, ":", "")
+  ])
+}
+
+output "ipv6_cidrs" {
+  description = "The list of IPv6 CIDRs for the service."
+  value = toset([
+    for cidr in local.cidrs :
+    cidr
+    if cidr != replace(cidr, ":", "")
+  ])
 }

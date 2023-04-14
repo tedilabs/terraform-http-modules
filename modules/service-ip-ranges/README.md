@@ -24,6 +24,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [http_http.atlassian](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 | [http_http.okta](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 | [http_http.scalr](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 | [http_http.terraform_cloud](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
@@ -40,6 +41,8 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_category"></a> [category](#output\_category) | The category to use for filtering the IP ranges of the service. |
-| <a name="output_cidrs"></a> [cidrs](#output\_cidrs) | The list of IP CIDRs for the service. |
+| <a name="output_cidrs"></a> [cidrs](#output\_cidrs) | The list of all IP CIDRs for the service. |
+| <a name="output_ipv4_cidrs"></a> [ipv4\_cidrs](#output\_ipv4\_cidrs) | The list of IPv4 CIDRs for the service. |
+| <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | The list of IPv6 CIDRs for the service. |
 | <a name="output_service"></a> [service](#output\_service) | The service which owns the IP ranges. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
