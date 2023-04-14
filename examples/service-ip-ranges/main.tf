@@ -47,7 +47,7 @@ locals {
 module "service_ip_ranges" {
   source = "../../modules/service-ip-ranges"
   # source  = "tedilabs/modules/http//modules/service-ip-ranges"
-  # version = "~> 0.1.0"
+  # version = "~> 0.2.0"
 
   for_each = {
     for target in local.targets :
