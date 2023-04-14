@@ -1,23 +1,45 @@
 locals {
   all_cidrs = {
+    "OKTA" = merge(
+      local.okta_cidrs,
+      try({
+        "all" = setunion(values(local.okta_cidrs)...)
+      }, {})
+    )
     "SCALR" = {
-      "ALL" = local.scalr_cidrs
+      "all" = local.scalr_cidrs
     }
-    "TERRAFORM_CLOUD" = try({
-      "ALL" = setunion(
-        local.terraform_cloud_cidrs["api"],
-        local.terraform_cloud_cidrs["notifications"],
-        local.terraform_cloud_cidrs["sentinel"],
-        local.terraform_cloud_cidrs["vcs"],
-      )
-      "API"           = local.terraform_cloud_cidrs["api"]
-      "NOTIFICATIONS" = local.terraform_cloud_cidrs["notifications"]
-      "SENTINEL"      = local.terraform_cloud_cidrs["sentinel"]
-      "VCS"           = local.terraform_cloud_cidrs["vcs"]
-    }, {})
+    "TERRAFORM_CLOUD" = merge(
+      local.terraform_cloud_cidrs,
+      try({
+        "all" = setunion(values(local.terraform_cloud_cidrs)...)
+      }, {})
+    )
   }
   service_cidrs = local.all_cidrs[var.service]
   cidrs         = local.service_cidrs[var.category]
+}
+
+
+###################################################
+# IP Ranges for Okta
+###################################################
+
+data "http" "okta" {
+  count = var.service == "OKTA" ? 1 : 0
+
+  url = "https://s3.amazonaws.com/okta-ip-ranges/ip_ranges.json"
+}
+
+locals {
+  okta_data = (var.service == "OKTA"
+    ? jsondecode(trimspace(data.http.okta[0].response_body))
+    : {}
+  )
+  okta_cidrs = {
+    for category, data in local.okta_data :
+    category => toset(data.ip_ranges)
+  }
 }
 
 
@@ -31,12 +53,6 @@ data "http" "scalr" {
   url = "https://scalr.io/.well-known/allowlist.txt"
 }
 
-data "http" "terraform_cloud" {
-  count = var.service == "TERRAFORM_CLOUD" ? 1 : 0
-
-  url = "https://app.terraform.io/api/meta/ip-ranges"
-}
-
 locals {
   scalr_data = (var.service == "SCALR"
     ? split("\n", trimspace(data.http.scalr[0].response_body))
@@ -46,7 +62,20 @@ locals {
     for ip in local.scalr_data :
     "${ip}/32"
   ])
+}
 
+
+###################################################
+# IP Ranges for Terraform Cloud
+###################################################
+
+data "http" "terraform_cloud" {
+  count = var.service == "TERRAFORM_CLOUD" ? 1 : 0
+
+  url = "https://app.terraform.io/api/meta/ip-ranges"
+}
+
+locals {
   terraform_cloud_data = (var.service == "TERRAFORM_CLOUD"
     ? jsondecode(trimspace(data.http.terraform_cloud[0].response_body))
     : {}

@@ -24,6 +24,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [http_http.okta](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 | [http_http.scalr](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 | [http_http.terraform_cloud](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
@@ -32,7 +33,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_service"></a> [service](#input\_service) | (Required) The service which owns the IP ranges. | `string` | n/a | yes |
-| <a name="input_category"></a> [category](#input\_category) | (Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `ALL`. Valid values are depends on which service is selected. | `string` | `"ALL"` | no |
+| <a name="input_category"></a> [category](#input\_category) | (Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `all`. Valid values are depends on which service is selected. | `string` | `"all"` | no |
 
 ## Outputs
 

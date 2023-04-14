@@ -1,16 +1,20 @@
 locals {
   targets = [
     {
+      service  = "OKTA"
+      category = "all"
+    },
+    {
       service  = "SCALR"
-      category = "ALL"
+      category = "all"
     },
     {
       service  = "TERRAFORM_CLOUD"
-      category = "ALL"
+      category = "all"
     },
     {
       service  = "TERRAFORM_CLOUD"
-      category = "API"
+      category = "api"
     },
   ]
 }
