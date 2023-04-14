@@ -13,6 +13,14 @@ locals {
       category = "jira"
     },
     {
+      service  = "GITHUB"
+      category = "all"
+    },
+    {
+      service  = "GITHUB"
+      category = "actions"
+    },
+    {
       service  = "OKTA"
       category = "all"
     },
