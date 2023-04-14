@@ -1,14 +1,20 @@
 variable "service" {
   description = "(Required) The service which owns the IP ranges."
   type        = string
+  nullable    = false
 
   validation {
     condition = contains([
       "SCALR",
-      "TERRAFORM_CLOUD_API",
-      "TERRAFORM_CLOUD_NOTIFICATIONS",
-      "TERRAFORM_CLOUD_SENTINEL",
-    "TERRAFORM_CLOUD_VCS"], var.service)
-    error_message = "Valid values for `service` are `SCALR`, `TERRAFORM_CLOUD_API`, `TERRAFORM_CLOUD_NOTIFICATIONS`, `TERRAFORM_CLOUD_SENTINEL`, `TERRAFORM_CLOUD_VCS`."
+      "TERRAFORM_CLOUD",
+    ], var.service)
+    error_message = "Valid values for `service` are `SCALR`, `TERRAFORM_CLOUD`."
   }
+}
+
+variable "category" {
+  description = "(Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `ALL`. Valid values are depends on which service is selected."
+  type        = string
+  default     = "ALL"
+  nullable    = false
 }
