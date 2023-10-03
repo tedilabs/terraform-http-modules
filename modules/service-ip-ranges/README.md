@@ -7,14 +7,14 @@ This module does not create any resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | >= 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_http"></a> [http](#provider\_http) | 3.2.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
 
 ## Modules
 
