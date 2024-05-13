@@ -7,6 +7,13 @@ locals {
         "all" = setunion(values(local.atlassian_cidrs)...)
       }, {})
     )
+    ## Checkly
+    "CHECKLY" = {
+      "all" = setunion(
+        local.checkly_ipv4_cidrs,
+        local.checkly_ipv6_cidrs,
+      )
+    }
     ## GitHub
     "GITHUB" = merge(
       local.github_cidrs,
@@ -63,6 +70,42 @@ locals {
       if contains(item.product, category) && contains(item.direction, "egress")
     ])
   }
+}
+
+
+###################################################
+# IP Ranges for Checkly
+###################################################
+
+data "http" "checkly_ipv4" {
+  count = var.service == "CHECKLY" ? 1 : 0
+
+  url = "https://api.checklyhq.com/v1/static-ips"
+}
+
+data "http" "checkly_ipv6" {
+  count = var.service == "CHECKLY" ? 1 : 0
+
+  url = "https://api.checklyhq.com/v1/static-ipv6s"
+}
+
+locals {
+  checkly_ipv4_data = (var.service == "CHECKLY"
+    ? jsondecode(trimspace(data.http.checkly_ipv4[0].response_body))
+    : []
+  )
+  checkly_ipv6_data = (var.service == "CHECKLY"
+    ? jsondecode(trimspace(data.http.checkly_ipv6[0].response_body))
+    : []
+  )
+  checkly_ipv4_cidrs = toset([
+    for ip in local.checkly_ipv4_data :
+    "${ip}/32"
+  ])
+  checkly_ipv6_cidrs = toset([
+    for ip in local.checkly_ipv6_data :
+    ip
+  ])
 }
 
 

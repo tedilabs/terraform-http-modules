@@ -13,6 +13,10 @@ locals {
       category = "jira"
     },
     {
+      service  = "CHECKLY"
+      category = "all"
+    },
+    {
       service  = "GITHUB"
       category = "all"
     },

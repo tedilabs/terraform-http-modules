@@ -6,12 +6,13 @@ variable "service" {
   validation {
     condition = contains([
       "ATLASSIAN",
+      "CHECKLY",
       "GITHUB",
       "OKTA",
       "SCALR",
       "TERRAFORM_CLOUD",
     ], var.service)
-    error_message = "Valid values for `service` are `ATLASSIAN`, `GITHUB`, `OKTA`, `SCALR`, `TERRAFORM_CLOUD`."
+    error_message = "Valid values for `service` are `ATLASSIAN`, `CHECKLY`, `GITHUB`, `OKTA`, `SCALR`, `TERRAFORM_CLOUD`."
   }
 }
 
