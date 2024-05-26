@@ -1,3 +1,5 @@
 # Modules
 ":floppy_disk: service-ip-ranges":
-- modules/service-ip-ranges/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/service-ip-ranges/**/*
