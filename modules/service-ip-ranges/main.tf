@@ -61,7 +61,7 @@ locals {
     : []
   )
 
-  atlassian_categories = ["bitbucket", "confluence", "jira", "trello"]
+  atlassian_categories = ["bitbucket", "confluence", "email", "forge", "jira", "opsgenie", "rovo-crawler", "statuspage", "trello"]
   atlassian_cidrs = {
     for category in local.atlassian_categories :
     category => toset([
@@ -125,7 +125,7 @@ locals {
     : tomap({})
   )
 
-  github_categories = ["hooks", "web", "api", "git", "packages", "pages", "importer", "actions", "dependabot"]
+  github_categories = ["hooks", "web", "api", "git", "github_enterprise_importer", "packages", "pages", "importer", "actions", "dependabot", "actions_macos", "codespaces", "copilot"]
   github_cidrs = try({
     for category in local.github_categories :
     category => toset(local.github_data[category])
