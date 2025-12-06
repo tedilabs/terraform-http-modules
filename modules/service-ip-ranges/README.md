@@ -37,15 +37,15 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_service"></a> [service](#input\_service) | (Required) The service which owns the IP ranges. | `string` | n/a | yes |
-| <a name="input_category"></a> [category](#input\_category) | (Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `all`. Valid values are depends on which service is selected. | `string` | `"all"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_category"></a> [category](#output\_category) | The category to use for filtering the IP ranges of the service. |
-| <a name="output_cidrs"></a> [cidrs](#output\_cidrs) | The list of all IP CIDRs for the service. |
-| <a name="output_ipv4_cidrs"></a> [ipv4\_cidrs](#output\_ipv4\_cidrs) | The list of IPv4 CIDRs for the service. |
-| <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | The list of IPv6 CIDRs for the service. |
+| <a name="output_all_ipv4_cidrs"></a> [all\_ipv4\_cidrs](#output\_all\_ipv4\_cidrs) | A set of all IPv4 CIDRs for the service. |
+| <a name="output_all_ipv6_cidrs"></a> [all\_ipv6\_cidrs](#output\_all\_ipv6\_cidrs) | A set of all IPv6 CIDRs for the service. |
+| <a name="output_categories"></a> [categories](#output\_categories) | A set of all available categories for the service. |
+| <a name="output_ipv4_cidrs"></a> [ipv4\_cidrs](#output\_ipv4\_cidrs) | A set of IPv4 CIDRs for the service per category. |
+| <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | A set of IPv6 CIDRs for the service per category. |
 | <a name="output_service"></a> [service](#output\_service) | The service which owns the IP ranges. |
 <!-- END_TF_DOCS -->

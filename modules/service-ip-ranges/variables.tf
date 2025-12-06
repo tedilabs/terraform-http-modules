@@ -15,10 +15,3 @@ variable "service" {
     error_message = "Valid values for `service` are `ATLASSIAN`, `CHECKLY`, `GITHUB`, `OKTA`, `SCALR`, `TERRAFORM_CLOUD`."
   }
 }
-
-variable "category" {
-  description = "(Optional) The category to use for filtering the IP ranges of the service. By default, it returns all IP ranges. Defaults to `all`. Valid values are depends on which service is selected."
-  type        = string
-  default     = "all"
-  nullable    = false
-}

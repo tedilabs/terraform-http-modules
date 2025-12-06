@@ -1,47 +1,21 @@
 locals {
   all_cidrs = {
-    ## Atlassian
-    "ATLASSIAN" = merge(
-      local.atlassian_cidrs,
-      try({
-        "all" = setunion(values(local.atlassian_cidrs)...)
-      }, {})
-    )
-    ## Checkly
+    "ATLASSIAN" = local.atlassian_cidrs
     "CHECKLY" = {
       "all" = setunion(
         local.checkly_ipv4_cidrs,
         local.checkly_ipv6_cidrs,
       )
     }
-    ## GitHub
-    "GITHUB" = merge(
-      local.github_cidrs,
-      try({
-        "all" = setunion(values(local.github_cidrs)...)
-      }, {})
-    )
-    ## HashiCorp
-    "TERRAFORM_CLOUD" = merge(
-      local.terraform_cloud_cidrs,
-      try({
-        "all" = setunion(values(local.terraform_cloud_cidrs)...)
-      }, {})
-    )
-    ## Okta
-    "OKTA" = merge(
-      local.okta_cidrs,
-      try({
-        "all" = setunion(values(local.okta_cidrs)...)
-      }, {})
-    )
-    ## Scalr
+    "GITHUB"          = local.github_cidrs
+    "TERRAFORM_CLOUD" = local.terraform_cloud_cidrs
+    "OKTA"            = local.okta_cidrs
     "SCALR" = {
       "all" = local.scalr_cidrs
     }
   }
-  service_cidrs = local.all_cidrs[var.service]
-  cidrs         = local.service_cidrs[var.category]
+  service_cidrs     = local.all_cidrs[var.service]
+  service_all_cidrs = setunion(values(local.service_cidrs)...)
 }
 
 
@@ -117,6 +91,7 @@ data "http" "github" {
   count = var.service == "GITHUB" ? 1 : 0
 
   url = "https://api.github.com/meta"
+
 }
 
 locals {
@@ -126,10 +101,11 @@ locals {
   )
 
   github_categories = ["hooks", "web", "api", "git", "github_enterprise_importer", "packages", "pages", "importer", "actions", "dependabot", "actions_macos", "codespaces", "copilot"]
-  github_cidrs = try({
-    for category in local.github_categories :
-    category => toset(local.github_data[category])
-  }, {})
+  github_cidrs = {
+    for category, cidrs in local.github_data :
+    category => toset(cidrs)
+    if contains(local.github_categories, category)
+  }
 }
 
 
