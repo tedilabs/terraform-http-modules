@@ -1,4 +1,11 @@
 locals {
+  metadata = {
+    package = "terraform-http-modules"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = null
+  }
+
   all_cidrs = {
     "ATLASSIAN" = local.atlassian_cidrs
     "CHECKLY" = {
