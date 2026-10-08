@@ -3,7 +3,7 @@ locals {
     package = "terraform-http-modules"
     version = trimspace(file("${path.module}/../../VERSION"))
     module  = basename(path.module)
-    name    = null
+    name    = var.service
   }
 
   all_cidrs = {
