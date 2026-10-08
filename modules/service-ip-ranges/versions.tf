@@ -6,5 +6,9 @@ terraform {
       source  = "hashicorp/http"
       version = ">= 3.5.0"
     }
+    telemetry = {
+      source  = "tedilabs/telemetry"
+      version = ">= 0.1.1"
+    }
   }
 }
