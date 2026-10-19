@@ -2,6 +2,63 @@
 
 This module does not create any resources.
 
+## Reuse lookups across child modules
+
+Declare this module once per service in the root module, then pass its outputs to
+the child modules that need them. Separate instances of this module perform
+separate HTTP lookups, even when their `service` values are identical.
+
+For example, two applications that allow GitHub webhook traffic can share one
+GitHub lookup:
+
+```hcl
+locals {
+  application_services = {
+    frontend = "GITHUB"
+    backend  = "GITHUB"
+  }
+}
+
+module "service_ip_ranges" {
+  source  = "tedilabs/modules/http//modules/service-ip-ranges"
+  version = "~> 0.4.0"
+
+  for_each = toset(values(local.application_services))
+
+  service = each.value
+}
+
+module "application" {
+  source = "./modules/application"
+
+  for_each = local.application_services
+
+  allowed_ipv4_cidrs = module.service_ip_ranges[each.value].ipv4_cidrs["hooks"]
+}
+```
+
+Here, `./modules/application` represents your own child module. Replace its
+internal `service-ip-ranges` lookup with an input, and use that input in its
+existing allowlist resources:
+
+```hcl
+variable "allowed_ipv4_cidrs" {
+  description = "IPv4 CIDRs supplied by the root module for the application allowlist."
+  type        = set(string)
+  nullable    = false
+}
+```
+
+Both application instances receive the same `hooks` IPv4 CIDRs. The set used by
+`for_each` contains only one `GITHUB` entry, so adding applications that use GitHub
+does not add more GitHub HTTP data sources. Select the appropriate category and
+IPv4 or IPv6 output for each consumer.
+
+This shares a lookup within one root configuration; it does not cache responses
+across Terraform runs or separate root configurations. Each normal plan still
+reads the HTTP data source. The [multi-service example](../../examples/service-ip-ranges)
+also uses one module instance per distinct service.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

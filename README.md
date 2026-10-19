@@ -43,6 +43,7 @@ module "terraform_cloud_ip_ranges" {
 ## Examples
 
 - [service-ip-ranges](./examples/service-ip-ranges)
+- [Reuse service IP lookups across child modules](./modules/service-ip-ranges#reuse-lookups-across-child-modules)
 
 
 ## Self Promotion
