@@ -99,6 +99,9 @@ data "http" "github" {
 
   url = "https://api.github.com/meta"
 
+  request_headers = var.github_token == null ? {} : {
+    Authorization = "Bearer ${var.github_token}"
+  }
 }
 
 locals {
