@@ -34,6 +34,13 @@ data "http" "atlassian" {
   count = var.service == "ATLASSIAN" ? 1 : 0
 
   url = "https://ip-ranges.atlassian.com/"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
@@ -62,12 +69,26 @@ data "http" "checkly_ipv4" {
   count = var.service == "CHECKLY" ? 1 : 0
 
   url = "https://api.checklyhq.com/v1/static-ips"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 data "http" "checkly_ipv6" {
   count = var.service == "CHECKLY" ? 1 : 0
 
   url = "https://api.checklyhq.com/v1/static-ipv6s"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
@@ -99,6 +120,12 @@ data "http" "github" {
 
   url = "https://api.github.com/meta"
 
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
@@ -124,6 +151,13 @@ data "http" "terraform_cloud" {
   count = var.service == "TERRAFORM_CLOUD" ? 1 : 0
 
   url = "https://app.terraform.io/api/meta/ip-ranges"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
@@ -146,6 +180,13 @@ data "http" "okta" {
   count = var.service == "OKTA" ? 1 : 0
 
   url = "https://s3.amazonaws.com/okta-ip-ranges/ip_ranges.json"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
@@ -168,6 +209,13 @@ data "http" "scalr" {
   count = var.service == "SCALR" ? 1 : 0
 
   url = "https://scalr.io/.well-known/allowlist.txt"
+
+  lifecycle {
+    postcondition {
+      condition     = self.status_code == 200
+      error_message = "Failed to fetch IP ranges from ${self.url}: HTTP status code ${self.status_code}."
+    }
+  }
 }
 
 locals {
