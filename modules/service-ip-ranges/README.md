@@ -103,7 +103,7 @@ No modules.
 | ---- | ----------- |
 | <a name="output_all_ipv4_cidrs"></a> [all\_ipv4\_cidrs](#output\_all\_ipv4\_cidrs) | A set of all IPv4 CIDRs for the service. |
 | <a name="output_all_ipv6_cidrs"></a> [all\_ipv6\_cidrs](#output\_all\_ipv6\_cidrs) | A set of all IPv6 CIDRs for the service. |
-| <a name="output_categories"></a> [categories](#output\_categories) | A set of all available categories for the service. |
+| <a name="output_categories"></a> [categories](#output\_categories) | A list of all available categories for the service. |
 | <a name="output_ipv4_cidrs"></a> [ipv4\_cidrs](#output\_ipv4\_cidrs) | A set of IPv4 CIDRs for the service per category. |
 | <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | A set of IPv6 CIDRs for the service per category. |
 | <a name="output_service"></a> [service](#output\_service) | The service which owns the IP ranges. |
