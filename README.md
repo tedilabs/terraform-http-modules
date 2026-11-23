@@ -4,7 +4,7 @@
 ![GitHub](https://img.shields.io/github/license/tedilabs/terraform-http-modules?color=blue&style=flat-square)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square)](https://github.com/pre-commit/pre-commit)
 
-Terraform package to mange useful data modules via HTTP provider.
+Terraform package to manage useful data modules via HTTP provider.
 
 - [service-ip-ranges](./modules/service-ip-ranges)
 
