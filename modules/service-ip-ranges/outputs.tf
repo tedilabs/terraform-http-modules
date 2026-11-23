@@ -4,7 +4,7 @@ output "service" {
 }
 
 output "categories" {
-  description = "A set of all available categories for the service."
+  description = "A list of all available categories for the service."
   value       = keys(local.service_cidrs)
 }
 
