@@ -64,7 +64,7 @@ also uses one module instance per distinct service.
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.16 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | >= 3.5.0 |
 | <a name="requirement_telemetry"></a> [telemetry](#requirement\_telemetry) | >= 0.2.0 |
 
